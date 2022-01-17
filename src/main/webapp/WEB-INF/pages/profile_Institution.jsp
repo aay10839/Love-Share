@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -42,28 +42,28 @@
       <!-- 內容 -->
       <div class="col-sm-10">
         <h3 class="mb-3 pb-1 border-bottom border-2 text-center">社福機構資料</h3>
-        <form action="" method="post">
+       
           <!-- 帳號 -->
           <div class="row mb-3">
             <label for="inputUserid" class="col-sm-2 col-form-label text-end fw-bold">帳號</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUserid" placeholder="a12345" readonly>
+              <input type="text" class="form-control" id="inputUserid" value ="${user_Account}" readonly>
             </div>
           </div>
           <!-- 密碼 -->
-          <div class="row mb-3">
+      <!--     <div class="row mb-3">
             <label for="inputPassword" class="col-sm-2 col-form-label text-end fw-bold">密碼</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="******">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="password" name="" class="form-control" id="inputPassword" placeholder="******">
+              <span class="text-danger"></span>
             </div>
-          </div>
+          </div> -->
           <!-- 社福機構名稱 -->
           <div class="row mb-3">
             <label for="inputUsername" class="col-sm-2 col-form-label text-end fw-bold">社福機構名稱</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUsername" placeholder="xxxxx機構">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="i_introduction" class="form-control" value="" id="inputUsername" placeholder="${user_name}">
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- 聯絡地址 -->
@@ -72,15 +72,15 @@
             <div class="col-sm-10">
               <div class="row g-3">
                 <div class="col-sm">
-                  <select class="col-sm form-select" id="selectCity"></select>
+                  <select class="col-sm form-select" name="i_address" id="縣市1"></select>
                 </div>
                 <div class="col-sm">
-                  <select class="col-sm form-select" id="selectRegion"></select>
+                  <select class="col-sm form-select" name="i_address" id="鄉鎮市區1"></select>
                 </div>                
                 <div class="col-sm-7">
-                  <input type="text" class="col-sm-7 form-control" id="inputAddress" placeholder="xx路xx巷xx號xx樓">
+                  <input type="text" name="i_address" class="col-sm-7 form-control" id="inputAddress" placeholder="${user_address}">
                 </div>
-                <span class="text-danger">*錯誤訊息*</span>
+                <span class="text-danger"></span>
               </div>
             </div>
           </div>
@@ -88,38 +88,40 @@
           <div class="row mb-3">
             <label for="inputPerson" class="col-sm-2 col-form-label text-end fw-bold">聯絡人</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPerson" placeholder="王xx">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="i_contact_person" class="form-control" id="inputPerson" placeholder="${user_name}" required>
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- 聯絡信箱 -->
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-2 col-form-label text-end fw-bold">聯絡Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="email" name="i_eamil" class="form-control" id="inputEmail" placeholder="${user_email}">
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- 聯絡電話 -->
           <div class="row mb-3">
             <label for="inputPhone" class="col-sm-2 col-form-label text-end fw-bold">聯絡電話</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPhone" placeholder="02-1234-5678">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="i_phone" class="form-control" id="inputPhone" placeholder="${user_phone}">
+              <span class="text-danger"></span>
             </div>
           </div>
+          <!-- UserID -->
+          <input type="hidden" name="userId" class="form-control" value="${userId}">
           <!-- 按鈕 -->
           <div class="float-end">
             <button class="btn btn-primary rounded-pill px-5 me-2" type="submit">清除</button>
-            <button class="btn btn-primary rounded-pill px-5" type="submit">儲存變更</button>
+            <button class="btn btn-primary rounded-pill px-5" type="submit" id="btnsubmit">儲存變更</button>
           </div>
 
-        </form>
+       
       </div>
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -131,7 +133,55 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
+    <script type="text/javascript">
+   window.onload = function () {
+       //當頁面載完之後，用AddressSeleclList.Initialize()，
+       //傳入要綁定的縣市下拉選單ID及鄉鎮市區下拉選單ID
+       AddressSeleclList.Initialize('縣市1', '鄉鎮市區1');
+       //後面四個參數分別是兩個下拉選單的預設文字跟值
+      AddressSeleclList.Initialize('縣市2', '鄉鎮市區2', 'Please Select City', '0', 'Please Select Area', '0');
+  }
+  function show() {
+       //取出指定縣市及鄉鎮市區的下拉選單的值
+       alert(AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1'));
+   }
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var institutionName = $("#inputUsername");
+  var personName = $("#inputPerson");
+  var email = $("#inputEmail");
+  var phone = $("#inputPhone");
+  var inputAddress = $("#inputAddress");
+
+  
+/*   var infoJsonString ='{"institutionName" : "institutionName.val()","personName" : "personName.val()","email" : "email.val()","phone" : "phone.val()"}';
+  var infoObject = JSON.parse(infoJsonString); */
+   
+ /*  var jsonString = '{"bar":"property","baz":3}';
+  var jsObject = JSON.parse(jsonString); //轉換為json物件
+  alert(jsObject.bar); //取json中的值 */
+
+  
+  $("#btnsubmit").click(function(e){
+/* 	  alert(addressStr.text());
+	  console.log(123); */
+	  $.ajax({
+		    url: "http://localhost:8080/updateData",// url位置
+		    type: 'post',// post
+		    data: {"institutionName":institutionName.val(),"personName":personName.val(),"email":email.val(),"phone":phone.val(),"inputAddress":inputAddress.val()},
+		    success: function () {
+		    	alert("success");
+		    },// 成功後要執行的函數
+		    error: function (xhr) { 
+		    	alert("ajax error");
+		    }     // 錯誤後執行的函數
+		});
+  })
+  });
+  </script>
   </body>
 </html>

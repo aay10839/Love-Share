@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -40,7 +41,22 @@
       <div class="col-sm-10">
         <h3 class="mb-3 pb-1 border-bottom border-2 text-center">捐贈紀錄</h3>
         
-        <!-- card -->
+        <%-- <!-- card -->
+        <c:forEach items="${ds_getAll}" var="card">
+        <div class="card bg-light mb-3 border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">沙拉油(品牌不限，可高溫烹煮)${card.d_code}</h5>
+            <p class="card-subtitle">信望愛中心</p>
+            <p class="card-text">數量：1</p>
+            <p class="card-text text-muted">等待物資中</p>
+            <div class="float-end">
+              <button class="btn btn-primary rounded-pill px-3 me-2" type="submit">取消捐贈</button>
+              <button class="btn btn-primary rounded-pill px-3" type="submit">完成捐贈</button>
+            </div>
+          </div>
+        </div>
+        </c:forEach>
+        
         <div class="card bg-light mb-3 border-0">
           <div class="card-body">
             <h5 class="card-title fw-bold">沙拉油(品牌不限，可高溫烹煮)</h5>
@@ -92,27 +108,29 @@
               <a class="btn btn-primary rounded-pill px-3">再捐一次</a>
             </div>
           </div>
-        </div>
+        </div> --%> 
+     <!--    [temp.index] -->
+<c:forEach items="${showRecord}" varStatus="temp">
         <!-- card -->
         <div class="card bg-light mb-3 border-0">
           <div class="card-body">
-            <h5 class="card-title fw-bold">沐浴乳 1000ml/瓶</h5>
+            <h5 class="card-title fw-bold">${showRecord[temp.index].productName}</h5>
             <p class="card-subtitle">伊甸基金會燕巢家園</p>
-            <p class="card-text">數量：15</p>
+            <p class="card-text">數量：${showRecord[temp.index].quatity}</p>
             <p class="card-text text-muted">已完成捐贈</p>
             <div class="float-end">
-              <a class="btn btn-primary rounded-pill px-3">再捐一次</a>
+              <a class="btn btn-primary rounded-pill px-3" href="/wishList">再捐一次</a>
             </div>
           </div>
         </div>
-
+</c:forEach>
 
         
       </div>
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -124,6 +142,7 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>

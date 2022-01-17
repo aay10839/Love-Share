@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -21,32 +22,30 @@
   <body class="d-flex flex-column h-100">
     
 <div id="header"></div>
-
 <!-- Begin page content -->
 <main class="flex-shrink-0">
   <div class="container">
     <!-- 項目資訊 -->
     <div class="row">
       <div class="col-lg-6">
-        <img src="https://picsum.photos/150?random=3" class="card-img-top" alt="...">
+        <img src="${AllGoods.URL_address}" class="card-img-top" alt="...">
       </div>
       <div class="col-lg-6">
-        <h3 class="fw-bold mt-3">沐浴乳 1000ml/瓶</h3>
+        <h3 class="fw-bold mt-3">${AllGoods.d_product}</h3>
         <p>伊甸基金會燕巢家園</p>
         <div class="progress mt-3">
           <div class="progress-bar" role="progressbar" style="width: 68%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <span>31/50</span>
+        <span>${QuantityInDetail}/${AllGoods.d_quan}</span>
         <ul class="mt-3">
-          <li>刊登時間</li>
-          <li>結束時間</li>
-          <li>剩餘天數:15天</li>
-          <li>送件方式</li>
-          <li>徵求數量</li>
-          <li>說明</li>
+          <li>刊登時間:${AllGoods.d_timestart}</li>
+          <li>結束時間:${AllGoods.d_timeover}</li>
+          <li>剩餘天數:${finalTime}</li>
+          <li>徵求數量:${AllGoods.d_quan}</li>
+          <li>說明:${AllGoods.d_desc}</li>
         </ul>
         <div class="float-end mb-5">
-          <button class="btn btn-primary rounded-pill px-5" type="submit">立即捐贈</button>
+          <a class="btn btn-primary rounded-pill px-5" href="give">立即捐贈</a>
         </div>
       </div>
     </div>
@@ -129,12 +128,10 @@
         </div>
       </div>
     </div> -->
-
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
-
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <!-- javascript -->
@@ -144,6 +141,7 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>

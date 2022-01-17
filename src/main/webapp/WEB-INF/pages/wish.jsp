@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -29,23 +29,38 @@
 <main class="flex-shrink-0">
   <div class="container">
     <h3 class="mb-3 pb-1 border-bottom border-2 text-center">徵求物資</h3>
-    <form>
+    <form action="/wish" method="post" enctype="multipart/form-data">
       <!-- 募集項目 -->
       <div class="row mb-3">
         <label for="inputProjectname" class="col-sm-2 col-form-label text-end fw-bold">徵求物品</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputProjectname" placeholder="如: 電風扇">
-          <span class="text-danger">*錯誤訊息*</span>
+          <input type="text" name="d_product" class="form-control" id="inputProjectname" placeholder="如: 電風扇" required>
+          <span class="text-danger"></span>
         </div>
       </div>   
+      <!-- 圖片 -->
+      <div class="row mb-3">
+        <label for="fileImage" class="col-sm-2 col-form-label text-end fw-bold">上傳圖片(限一張)</label>
+        <div class="col-sm-10">
+          <div class="border rounded py-3">
+          <!--   <form action="/somewhere/to/upload" enctype="multipart/form-data"> -->
+              <input type="file" name="img" accept="image/*" multiple="multiple"/>
+          <!--     </form> -->
+              <div class="imgShape" id="restrictImg">
+                <span class="text-danger"></span>
+              </div>
+              
+          </div>
+        </div>
+      </div>
       <!-- 物件的狀態 -->
       <div class="row mb-3">
         <label for="inputState" class="col-sm-2 col-form-label text-end fw-bold">徵求物品狀態</label>
         <div class="col-sm-10">
-          <select class="form-select" id="selectState" aria-label="Default select example">
-            <option value="1" selected>全新或二手皆可</option>
-            <option value="2">全新</option>
-            <option value="3">二手</option>
+          <select name="d_norm" class="form-select" id="selectState" aria-label="Default select example">
+            <option  value="全新或二手皆可" selected>全新或二手皆可</option>
+            <option  value="全新">全新</option>
+            <option  value="二手">二手</option>
           </select>
         </div>
       </div>   
@@ -53,39 +68,32 @@
       <div class="row mb-3">
         <label for="inputQuantity" class="col-sm-2 col-form-label text-end fw-bold">徵求數量</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" id="inputQuantity" placeholder="1">
-          <span class="text-danger">*錯誤訊息*</span>
-        </div>
-      </div>
-      <!-- 圖片 -->
-      <div class="row mb-3">
-        <label for="fileImage" class="col-sm-2 col-form-label text-end fw-bold">上傳圖片(限一張)</label>
-        <div class="col-sm-10">
-          <div class="border rounded py-3">
-            <form action="/somewhere/to/upload" enctype="multipart/form-data">
-              <input type="file" id="fileImage" onclick="myFunction()" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png"/>
-              <div class="imgShape" id="restrictImg">
-                <img id="preview_progressbarTW_img" src="#" style="width: 100%;height: 100%;"/>
-                <span class="text-danger">*錯誤訊息*</span>
-              </div>
-            </form>
-          </div>
+          <input type="number" name="d_quan" class="form-control" id="inputQuantity" placeholder="1" required>
+          <span class="text-danger"></span>
         </div>
       </div>
       <!-- 說明 -->
       <div class="row mb-3">
         <label for="textareaDesc" class="col-sm-2 col-form-label text-end fw-bold">需求說明</label>
         <div class="col-sm-10">
-          <textarea class="form-control" id="textareaDesc" rows="5" placeholder="此次徵求的相關說明"></textarea>
-          <span class="text-danger">*錯誤訊息*</span>
+          <textarea  name="d_desc" class="form-control" id="textareaDesc" rows="5" placeholder="此次徵求的相關說明"></textarea>
+          <span class="text-danger"></span>
+        </div>
+      </div>
+      <!-- 開始時間 -->
+      <div class="row mb-3">
+        <label for="inputEndtime" class="col-sm-2 col-form-label text-end fw-bold">開始時間</label>
+        <div class="col-sm-10">
+          <input type="date" name="d_timestart" class="form-control" id="inputEndtime" placeholder="如: 2021/10/10" required>
+          <span class="text-danger"></span>
         </div>
       </div>
       <!-- 結束時間 -->
       <div class="row mb-3">
         <label for="inputEndtime" class="col-sm-2 col-form-label text-end fw-bold">結束時間</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputEndtime" placeholder="如: 2021/10/10">
-          <span class="text-danger">*錯誤訊息*</span>
+          <input type="date" name="d_timeover" class="form-control" id="inputEndtime" placeholder="如: 2021/10/10" required>
+          <span class="text-danger"></span>
         </div>
       </div>
       <!-- 聯絡地址 -->
@@ -94,15 +102,15 @@
         <div class="col-sm-10">
           <div class="row g-3">
             <div class="col-sm">            
-              <select class="form-select" id="selectCity"></select>
+              <select class="form-select" id="縣市1" required></select>
             </div>
             <div class="col-sm">            
-              <select class="form-select" id="selectRegion"></select>
+              <select class="form-select" id="鄉鎮市區1" required></select>
             </div>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="inputAddress" placeholder="如: xx路xx巷xx號xx樓">
+              <input type="text" name="d_contact_address" class="form-control" id="inputAddress" placeholder="如: xx路xx巷xx號xx樓" required>
             </div>
-            <span class="text-danger">*錯誤訊息*</span>
+            <span class="text-danger"></span>
           </div>
         </div>
       </div>
@@ -110,35 +118,38 @@
       <div class="row mb-3">
         <label for="inputPerson" class="col-sm-2 col-form-label text-end fw-bold">聯絡人</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputPerson" placeholder="如: 王xx">
-          <span class="text-danger">*錯誤訊息*</span>
+          <input type="text" name="d_contact_person" class="form-control" id="inputPerson" placeholder="如: 王xx" required>
+          <span class="text-danger"></span>
         </div>
       </div>
       <!-- 聯絡信箱 -->
       <div class="row mb-3">
         <label for="inputEmail" class="col-sm-2 col-form-label text-end fw-bold">聯絡Email</label>
         <div class="col-sm-10">
-          <input type="email" class="form-control" id="inputEmail" placeholder="如: name@example.com">
-          <span class="text-danger">*錯誤訊息*</span>
+          <input type="email" name="d_contact_email" class="form-control" id="inputEmail" placeholder="如: name@example.com" required>
+          <span class="text-danger"></span>
         </div>
       </div>
       <!-- 聯絡電話 -->
       <div class="row mb-3">
         <label for="inputPhone" class="col-sm-2 col-form-label text-end fw-bold">聯絡電話</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputPhone" placeholder="如: 02-1234-5678">
-          <span class="text-danger">*錯誤訊息*</span>
+          <input type="text" name="d_contact_phone" class="form-control" id="inputPhone" placeholder="如: 02-1234-5678" pattern="09\d{8}" required>
+          <span class="text-danger"></span>
         </div>
       </div>
+      <!-- userId -->
+      <input type="hidden" name="i_id" class="form-control" value="${UserID}">
       <!-- 按鈕 -->
       <div class="float-end mb-5">
-        <button class="btn btn-primary rounded-pill px-5 me-2" type="submit">取消</button>
-        <button class="btn btn-primary rounded-pill px-5" type="submit">新增</button>
+        <button class="btn btn-primary rounded-pill px-5 me-2">取消</button>
+        <button type="submit" class="btn btn-primary rounded-pill px-5" >新增</button>
       </div>
     </form>
+    
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -150,7 +161,21 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
+    <script type="text/javascript">
+   window.onload = function () {
+       //當頁面載完之後，用AddressSeleclList.Initialize()，
+       //傳入要綁定的縣市下拉選單ID及鄉鎮市區下拉選單ID
+       AddressSeleclList.Initialize('縣市1', '鄉鎮市區1');
+       //後面四個參數分別是兩個下拉選單的預設文字跟值
+      AddressSeleclList.Initialize('縣市2', '鄉鎮市區2', 'Please Select City', '0', 'Please Select Area', '0');
+  }
+  function show() {
+       //取出指定縣市及鄉鎮市區的下拉選單的值
+       alert(AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1'));
+   }
+</script>
   </body>
 </html>

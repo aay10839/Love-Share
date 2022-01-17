@@ -138,7 +138,14 @@
           </div>
         </div>
       </div>
+      <div id="checkLogin"></div>
     </footer>
+    <script>
+    $(document).ready(function(){
+    	$("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
+    	})
+    	
+    </script>
     <!-- sweetalert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery -->

@@ -41,6 +41,32 @@
     <artifactId>tomcat-jasper</artifactId>
     <version>9.0.52</version>
 </dependency>
+<dependency>
+    <groupId>jstl</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.taglibs</groupId>
+    <artifactId>taglibs-standard-impl</artifactId>
+    <version>1.2.5</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.10.Final</version>
+</dependency>
+<dependency>  
+    <groupId>org.springframework.boot</groupId>  
+    <artifactId>spring-boot-devtools</artifactId>  
+    <optional>true</optional>
+    <!-- 必須修改為true，預設是false -->
+    <!-- optional=true,依賴不會傳遞，該專案依賴devtools；之後依賴myboot專案的專案如果想要使用devtools，需要重新引入 -->  
+</dependency>  
+
+
 
 
 

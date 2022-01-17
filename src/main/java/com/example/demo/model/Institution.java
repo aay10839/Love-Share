@@ -1,28 +1,52 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Institution {
 	@Id
-	private String i_id;
+	@GeneratedValue()
+	@Column(name="i_id")
+	private int i_id;
+	@Column(name="i_password")
 	private String i_password;
+	@Column(name="i_name")
 	private String i_name;
+	@Column(name="i_type_code")
 	private int i_type_code;
+	@Column(name="i_introduction")
 	private String i_introduction;
+	@Column(name="i_service")
 	private String i_service;
+	@Column(name="i_website")
 	private String i_website;
+	@Column(name="i_contact_person")
 	private String i_contact_person;
+	@Column(name="i_phone")
 	private String i_phone;
+	@Column(name="i_fax")
 	private String i_fax;
+	@Column(name="i_email")
 	private String i_email;
+	@Column(name="i_address")
 	private String i_address;
+	@Column(name="userId")
+	private String userId;
 	
-	public String getI_id() {
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public int getI_id() {
 		return i_id;
 	}
-	public void setI_id(String i_id) {
+	public void setI_id(int i_id) {
 		this.i_id = i_id;
 	}
 	public String getI_password() {

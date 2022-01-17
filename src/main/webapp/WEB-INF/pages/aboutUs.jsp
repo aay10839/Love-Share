@@ -329,7 +329,7 @@
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 
 <div id="footer"></div>
 
@@ -342,6 +342,7 @@
     $(document).ready(function() {
     	$("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
     	$("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+    	$("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     }) 
     </script>
   </body>

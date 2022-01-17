@@ -1,5 +1,8 @@
+<%@page import="javax.swing.text.html.CSS.Attribute"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -21,7 +24,6 @@
   <body class="d-flex flex-column h-100">
     
 <div id="header"></div>
-
 <!-- Begin page content -->
 <main class="flex-shrink-0">
   <div class="container">
@@ -54,14 +56,13 @@
           剩餘天數：多到少
         </label>
       </div>
-      
-      
+
     </div>
     <div class="col-sm-10">
       <!-- 內容 -->
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        <!-- card-1 -->
-        <div class="col">
+        <!-- <!-- card-1 -->
+<!--         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=1" class="card-img-top" alt="...">
             <div class="card-body">
@@ -77,7 +78,7 @@
             </div>
           </div>
         </div>
-        <!-- card-2 -->
+        card-2
         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=2" class="card-img-top" alt="...">
@@ -94,7 +95,7 @@
             </div>
           </div>
         </div>
-        <!-- card-3 -->
+        card-3
         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=3" class="card-img-top" alt="...">
@@ -111,7 +112,7 @@
             </div>
           </div>
         </div>
-        <!-- card-4 -->
+        card-4
         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=4" class="card-img-top" alt="...">
@@ -128,7 +129,7 @@
             </div>
           </div>
         </div>
-        <!-- card-5 -->
+        card-5
         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=5" class="card-img-top" alt="...">
@@ -145,12 +146,12 @@
             </div>
           </div>
         </div>
-        <!-- card-6 -->
+        card-6
         <div class="col">
           <div class="card">
             <img src="https://picsum.photos/150?random=6" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-title fw-bold text-truncate"><a href="#" class="stretched-link">幫社工免費上英文課的志工老師</a></p>
+              <p class="card-title fw-bold text-truncate"><a href="wishDetails" class="stretched-link">幫社工免費上英文課的志工老師</a></p>
               <p class="card-text">臺北市政府社會局內湖社會福利服務中心</p>
               <div class="progress mt-3">
                 <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -161,7 +162,36 @@
               </p>
             </div>
           </div>
+        </div> -->
+<%
+	int i = 0;
+%>
+<c:forEach items="${ds_getAll}" var="goods" varStatus="temp">
+        <c:if test="${quantity[temp.index] < goods.d_quan}">
+<%--  <c:set var="showList" scope="session" value="${ds_getAll[temp.index]}"/> --%>
+<div class="col">
+          <div class="card">
+            <img src="${goods.URL_address}" class="card-img-top" alt="...">
+            <div class="card-body"> 
+              <p class="card-title fw-bold text-truncate"><a href="wishDetails?i=<%=i%>" class="stretched-link">尿布墊</a></p>
+              <p class="card-text">${goods.d_product}</p>
+              <div class="progress mt-3">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <p class="card-text mt-2">
+                <span class="float-start">${quantity[temp.index]}/${goods.d_quan}</span>
+                <span class="float-end">剩餘${time[temp.index]}天</span>
+              </p>
+              <%
+              i++;
+              %>
+            </div>
+          </div>
         </div>
+	</c:if> 
+<%-- ${user.d_contact_address} --%>
+<%-- ${ds_getAll[0].d_code} --%>
+</c:forEach>
       </div>
     </div>
   </div>
@@ -172,6 +202,7 @@
   </div>
   
 </main>
+<div id="checkLogin"></div>
 
 <div id="footer"></div>
 
@@ -184,7 +215,9 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
+    
   </body>
 </html>

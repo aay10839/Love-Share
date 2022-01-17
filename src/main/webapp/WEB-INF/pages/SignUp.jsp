@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -29,26 +29,29 @@
       <!-- 一般會員註冊 -->
       <div class="col-sm px-5">
         <h3 class="border-bottom border-2 mb-5 pb-3 fw-bold">一般會員註冊</h3>
-        <form action="" method="post">
+        <form action="SignUp" method="get">
           <div class="row mb-3">
             <label for="inputUserid" class="col-sm-2 col-form-label">帳號</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUserid" placeholder="User id">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="user_account" class="form-control" id="inputUserid" placeholder="User id" required>
+              <span class="text-danger"></span>
             </div>
           </div>
+          	<!-- 會員級別 -->
+          	<input type="hidden" name="isadmin" class="form-control" value="${admin}" >
+          	<!--  -->
           <div class="row mb-3">
-            <label for="inputPassword" class="col-sm-2 col-form-label">密碼</label>
+            <label for="inputPassword" class="col-sm-2 col-form-label" pattern="password" >密碼</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="password" name="user_password" class="form-control" id="inputPassword" placeholder="Password" required>
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-2 col-form-label text-end fw-bold">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="email" name="user_email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
@@ -59,7 +62,7 @@
                   註冊為會員，即代表您已同意本站之<a href="agreement" target="_blank">服務條款</a>
                 </label>
               </div>
-              <span class="text-danger">*錯誤訊息*</span>
+              <span class="text-danger"></span>
             </div>
           </div>
           <button type="submit" class="btn btn-primary w-100">Sign up</button>
@@ -68,33 +71,29 @@
       <!-- 社福機構註冊 -->
       <div class="col-sm px-5">
         <h3 class="border-bottom border-2 mb-5 pb-3 fw-bold">社福機構註冊</h3>
-        <form action="" method="post">
+        <form action="SignUp">
           <div class="row mb-3">
             <label for="inputUserid" class="col-sm-2 col-form-label">帳號</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUserid" placeholder="User id">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="user_account" class="form-control" id="inputUserid" placeholder="User id">
+              <span class="text-danger"></span>
             </div>
           </div>
+          <!-- 會員級別 -->
+          	<input type="hidden" name="isadmin" class="form-control" value="${companyAdmin}" >
+          <!--  -->	
           <div class="row mb-3">
             <label for="inputPassword" class="col-sm-2 col-form-label">密碼</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="password" name="user_password" class="form-control" id="inputPassword" placeholder="Password">
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputUsername" class="col-sm-2 col-form-label">機構名稱</label>
+            <label for="inputEmail" class="col-sm-2 col-form-label text-start fw-bold">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUsername" placeholder="name">
-              <span class="text-danger">*錯誤訊息*</span>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputEmail" class="col-sm-2 col-form-label text-end fw-bold">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="email" name="user_email" class="form-control" id="inputEmail" placeholder="name@example.com">
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
@@ -105,7 +104,7 @@
                   註冊為會員，即代表您已同意本站之<a href="agreement" target="_blank">服務條款</a>
                 </label>
               </div>
-              <span class="text-danger">*錯誤訊息*</span>
+              <span class="text-danger"></span>
             </div>
           </div>
           <button type="submit" class="btn btn-primary w-100">Sign up</button>
@@ -118,7 +117,7 @@
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -130,6 +129,7 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>

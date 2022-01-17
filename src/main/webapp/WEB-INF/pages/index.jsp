@@ -109,11 +109,30 @@
     <!-- javascript -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <%
+     Object var = session.getAttribute("user_account");
+     String user_account ="";
+    if(var != null){
+    	user_account = var.toString();
+    	
+    }
+    System.out.println(var);
+    %>
     <script>
-    $(document).ready(function() {
-      $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
-      $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
-    })
+      var user_account = "";
+     user_account = "<%=user_account%>"
+     if(user_account != ""){
+    	 $(document).ready(function() {
+   	      $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/loginIn_header.jsp");
+   	      $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/loginIn_footer.jsp");
+   	    })
+    	 
+     }else{ 
+    	 $(document).ready(function() {
+    	      $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
+    	      $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+    	    })
+     }
     </script>
   </body>
 </html>

@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/resource/brand/loveandshare_icon.png">
     <!-- fontawesome v4.7 -->
     <script src="https://use.fontawesome.com/07ac6b813c.js"></script>
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS  dfsdf-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/resource/scss/all.css" rel="stylesheet">
@@ -131,7 +131,7 @@
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 
 <div id="footer"></div>
 
@@ -144,6 +144,7 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>

@@ -16,7 +16,7 @@
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link href="scss/all.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resource/scss/all.css" rel="stylesheet">
   </head>
   <body class="d-flex flex-column h-100">
     
@@ -29,19 +29,19 @@
       <!-- 登入 -->
       <div class="col-sm-6">
         <h3 class="border-bottom border-2 mb-5 pb-3 fw-bold text-center">登入</h3>
-        <form action="" method="post">
+        <form action="SignIn" method="post">
           <div class="row mb-3">
             <label for="inputUserid" class="col-sm-2 col-form-label">帳號</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUserid" placeholder="User id">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" name="user_account" class="form-control" id="inputUserid" placeholder="User id">
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputPassword" class="col-sm-2 col-form-label">密碼</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="password" name="user_password" class="form-control" id="inputPassword" placeholder="Password">
+              <span class="text-danger"></span>
             </div>
           </div>
           <div class="row mb-3">
@@ -64,7 +64,7 @@
     </div>
   </div>
 </main>
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -76,6 +76,7 @@
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>

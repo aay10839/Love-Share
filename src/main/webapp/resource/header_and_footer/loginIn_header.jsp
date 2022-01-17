@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
   <nav class="navbar navbar-expand-lg navbar-primary bg-primary" aria-label="Ninth navbar example">
     <div class="container-xl">
@@ -42,13 +43,20 @@
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="dropdown_user" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown_user">
-           <!--    <li><a class="dropdown-item" href="profile_member">會員專頁</a></li>
+              <li><a class="dropdown-item" href="profile_member">會員專頁</a></li>
               <li><a class="dropdown-item" href="giveRecord">捐贈紀錄</a></li>
               <li><a class="dropdown-item" href="wishRecord">募集記錄</a></li>
-              <li><a class="dropdown-item" href="#">登出</a></li>
-              <li><hr></li> -->
-              <li><a class="dropdown-item" href="SignUp">註冊</a></li>
-              <li><a class="dropdown-item" href="SignIn">登入</a></li>
+              <li><a class="dropdown-item" href="#" id="loginOut">登出</a></li>
+              <script>
+              $("#loginOut").click(function(){
+            	
+              })
+              
+              </script>
+              <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+       <!--        <li><hr></li> -->
+   <!--            <li><a class="dropdown-item" href="SignUp">註冊</a></li>
+              <li><a class="dropdown-item" href="SignIn">登入</a></li> -->
             </ul>
           </li>
         </ul>

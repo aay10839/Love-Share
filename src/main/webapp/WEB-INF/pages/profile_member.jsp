@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -44,39 +44,31 @@
           <div class="row mb-3">
             <label for="inputUserid" class="col-sm-2 col-form-label text-end fw-bold">帳號</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUserid" placeholder="a12345" readonly>
-            </div>
-          </div>
-          <!-- 密碼 -->
-          <div class="row mb-3">
-            <label for="inputPassword" class="col-sm-2 col-form-label text-end fw-bold">密碼</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="******">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" class="form-control" id="inputUserid" value="${user_Account}" readonly>
             </div>
           </div>
           <!-- 使用者姓名 -->
           <div class="row mb-3">
             <label for="inputUsername" class="col-sm-2 col-form-label text-end fw-bold">姓名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUsername" placeholder="你的姓名">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" class="form-control" id="inputUsername" value="${user_name}">
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- E-mail -->
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-2 col-form-label text-end fw-bold">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="email" class="form-control" id="inputEmail" value="${user_email}">
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- 電話 -->
           <div class="row mb-3">
             <label for="inputPhone" class="col-sm-2 col-form-label text-end fw-bold">電話</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPhone" placeholder="02-1234-5678">
-              <span class="text-danger">*錯誤訊息*</span>
+              <input type="text" class="form-control" id="inputPhone" value="${user_phone}">
+              <span class="text-danger"></span>
             </div>
           </div>
           <!-- 按鈕 -->
@@ -92,7 +84,7 @@
 </main>
 
 
-
+<div id="checkLogin"></div>
 <div id="footer"></div>
 
     <!-- bootstrap js -->
@@ -100,10 +92,11 @@
     <!-- javascript -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script>
+     <script>
     $(document).ready(function() {
       $("#header").load("${pageContext.request.contextPath}/resource/header_and_footer/header.jsp");
       $("#footer").load("${pageContext.request.contextPath}/resource/header_and_footer/footer.jsp");
+      $("#checkLogin").load("${pageContext.request.contextPath}/resource/header_and_footer/checkLogin.jsp")
     })
     </script>
   </body>
